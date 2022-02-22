@@ -6,17 +6,22 @@ class BubbleSort
 {
     public static function sort(array $collection): array
     {
-        $size = count($collection);
+        $n = count($collection);
+        for ($i = 1; $i <= $n - 1; $i++) {
+            $swapped = false;
+            for ($j = 1; $j <= $n - $i; $j++) {
+                $item = $collection[$j - 1];
+                $nextItem = $collection[$j];
 
-        for ($i = 0; $i < $size - 1; $i++) {
-            for ($j = 0; $j < $size - 1 - $i; $j++) {
-                $item = $collection[$j];
-                $nextItem = $collection[$j + 1];
-
-                if ($nextItem < $item) {
-                    $collection[$j + 1] = $item;
-                    $collection[$j] = $nextItem;
+                if ($item > $nextItem) {
+                    $swapped = true;
+                    $collection[$j - 1] = $nextItem;
+                    $collection[$j] = $item;
                 }
+            }
+
+            if (!$swapped) {
+                break;
             }
         }
 
